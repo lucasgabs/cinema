@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Cinema</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
     </head>
     <body>
-        <div>TODO write content</div>
+         <h1>Caixa do Cinema ConTiLuc</h1>
+         <h3>Ingressos</h3>
+         <form th:action="${p == null ? '/adicionar' : '/atualizar'}" method="POST">
+            <input th:if="${p != null}"
+                type="hidden" name="id"
+                   th:value="${p.getId()}">
+            <label>Nome: </label>
+            <input type="text" name="nome" required maxlength="100"
+                   th:value="${p?.getNome()}"><br>
+            <label>Quantidade: </label>
+            <input type="number" name="quantidade" required
+                   th:value="${p?.getQuantidade()}"><br>
+            <label>Valor: </label>
+            <input type="text" name="preco" 
+                   required
+                   th:value="${p?.getPreco()}"><br>
+            <button type="submit"
+                    th:text="${p == null ? 'Adicionar' : 'Atualizar'}"></button>
+        </form>
     </body>
 </html>
