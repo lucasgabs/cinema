@@ -9,11 +9,12 @@ public class Ingresso {
     
     private int id;
     private String nome;
-    private float preco;
+    private float valor;
+    
 
-    public Ingresso(String nome, float preco) {
+    public Ingresso(String nome, float valor) {
         this.nome = nome;
-        this.preco = preco;
+        this.valor = valor;
     }
 
     public int getId() {
@@ -24,34 +25,32 @@ public class Ingresso {
         return nome;
     }
 
-    public float getPreco() {
-        return preco;
+    public float getValor() {
+        return valor;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public void setPreco(float preco) {
-        this.preco = preco;
+    public void setValor(float valor) {
+        this.valor = valor;
     }
     
     public void salvar(JdbcTemplate jdbc) {
         if (id > 0) {
-            jdbc.update(
-            "UPDATE ingressos SET nome = ?, "
-            + "preco = ? "
+            jdbc.update("UPDATE ingressos SET nome = ?, "
+            + "valor = ? "
             + "WHERE id = ?;", (ps) -> {
                 ps.setString(1, nome);
-                ps.setFloat(2, preco);
+                ps.setFloat(2, valor);
                 ps.setInt(3, id);
             });
         } else {
-            jdbc.update(
-            "INSERT INTO ingressos (nome, preco) " +
+            jdbc.update("INSERT INTO ingressos (nome, valor) " +
             "VALUES (?, ?);", (ps) -> {
                 ps.setString(1, nome);
-                ps.setFloat(2, preco);
+                ps.setFloat(2, valor);
             });
         }
     }
@@ -65,7 +64,7 @@ public class Ingresso {
             do {
                 Ingresso i = new Ingresso(
                         rs.getString("nome"),
-                        rs.getFloat("preco"));
+                        rs.getFloat("valor"));
                 i.id = rs.getInt("id");
                 ingressos.add(i);
             } while(rs.next());
@@ -91,7 +90,7 @@ public class Ingresso {
         }, (rs) -> {
             Ingresso i = new Ingresso(
                     rs.getString("nome"),
-                    rs.getFloat("preco"));
+                    rs.getFloat("valor"));
             i.id = rs.getInt("id");
             ingresso.set(i);
         });

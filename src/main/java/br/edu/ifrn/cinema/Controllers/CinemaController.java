@@ -35,7 +35,7 @@ public class CinemaController {
             String nome, float preco) {
         Ingresso i = Ingresso.buscar(id, jdbc);
         i.setNome(nome);
-        i.setPreco(preco);
+        i.setValor(preco);
         i.salvar(jdbc);
         return "redirect:/";
     }
