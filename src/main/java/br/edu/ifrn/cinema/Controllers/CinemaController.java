@@ -24,18 +24,18 @@ public class CinemaController {
     @Autowired JdbcTemplate jdbc;
     
     @PostMapping("/adicionar")
-    public String adicionar(String nome, float preco) {
-        Ingresso i = new Ingresso(nome, preco);
+    public String adicionar(String nome, float valor) {
+        Ingresso i = new Ingresso(nome, valor);
         i.salvar(jdbc);
         return "redirect:/";
     }
     
     @PostMapping("/atualizar")
     public String atualizar(int id, 
-            String nome, float preco) {
+            String nome, float valor) {
         Ingresso i = Ingresso.buscar(id, jdbc);
         i.setNome(nome);
-        i.setValor(preco);
+        i.setValor(valor);
         i.salvar(jdbc);
         return "redirect:/";
     }

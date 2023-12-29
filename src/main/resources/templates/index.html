@@ -27,9 +27,9 @@
                    required maxlength="100"
                    th:value="${p?.getNome()}"><br>
             <label>Valor da entrada: </label>
-            <input type="text" name="preco"
+            <input type="text" name="valor"
                    required
-                   th:value="${p?.getPreco()}"><br>
+                   th:value="${p?.getValor()}"><br>
             <button type="submit"
                     th:text="${p == null ? 'Adicionar' : 'Atualizar'}"></button>
         </form>
@@ -45,7 +45,7 @@
             <tbody>
                 <tr th:each="ingresso : ${ingresso}">
                     <td th:text="${ingresso.getNome()}"></td>
-                    <td th:text="${'R$ ' + ingresso.getPreco()}"></td>
+                    <td th:text="${'R$ ' + ingresso.getValor()}"></td>
                     <td>
                         <a th:href="${'/excluir?id=' + ingresso.getId()}">Excluir</a>
                         <a th:href="${'/editar?id=' + ingresso.getId()}">Editar</a>
